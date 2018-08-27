@@ -1,11 +1,16 @@
 const Article = require('../models/article')
 const jwt = require('jsonwebtoken')
+const tokenjwt = process.env.JWT_TOKEN
+
 
 
 module.exports = {
     create: (req,res) => {
     let token = req.headers.token;
-    let decode = jwt.verify(token, process.env.JWT_TOKEN);
+    console.log('req headersdari create ===>', req.headers.token)
+    let decode = jwt.verify(token, tokenjwt);
+    console.log(req.body);
+    
    
         Article
             .create({
@@ -50,14 +55,15 @@ module.exports = {
                 })
             })
     },
-    myArticle: (req,res) => {
-        let token = req.headers.token;
-        let decoded = jwt.verify(token, process.env.JWT_TOKEN);
+
+    getMyArticle: (req,res) => {
+        const { token } = req.headers
+        let decoded = jwt.verify(token, tokenjwt);
         Article
         .find({
             userId:decoded.id
         })
-        .populate("userId")
+        // .populate("userId", 'email')
         .then(articles => {
             res.status(200).json({
               message: "data my article",
@@ -136,7 +142,7 @@ module.exports = {
 
   commentArticle:(req, res)=> {
     let token = req.headers.token
-    let decode = jwt.verify(token, process.env.JWT_SECRET_KEY)
+    let decode = jwt.verify(token,tokenjwt)
     let id = req.params.id;
     Article
     .updateOne(

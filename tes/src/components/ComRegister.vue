@@ -62,9 +62,10 @@ export default {
               'Access-Control-Allow-Origin': '*'
             }
           })
-             .then(response => {
-               console.log(response);
-               
+             .then(({ data }) => {
+               console.log('--->',data.token);
+              //  localStorage.setItem('token', data.token)
+              //  localStorage
                router.push('/login')
               })
             .catch(err => {

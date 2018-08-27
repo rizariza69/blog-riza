@@ -7,8 +7,8 @@
       
       <router-link to="/">Home</router-link> |
       <router-link to="/myArticle">My Article</router-link> | 
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/"  @click="logout">Logout</router-link>
+      <router-link v-if="token" to="/login">Login</router-link> |
+      <router-link to="/" v-if="!token" @click="logout">Logout</router-link>
       
     </div>
     <router-view/>

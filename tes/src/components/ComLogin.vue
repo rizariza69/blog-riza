@@ -64,7 +64,8 @@ export default {
               'Access-Control-Allow-Origin': '*'
             }
       })
-       .then(response => {
+       .then(({data}) => {
+         localStorage.setItem('token',data.token)
         swal("Good job!", "Success Login!", "success");
           router.push('/')
         })

@@ -1,20 +1,27 @@
 const jwt = require("jsonwebtoken");
 const User = require('../models/users')
 
+
 var isLogin = (req, res, next) => {
+    console.log('ini req headers dr helper', req.headers);
+    
     let token = req.headers.token
-    let decode = jwt.verify(token, process.env.JWT_SECRET_KEY)
+    let decode = jwt.verify(token, process.env.JWT_TOKEN)
+    console.log('ini email sekarang cuy', decode.email)
     if(token){
         User.findOne({email: decode.email})
         .then((data) => {
             if(data){
+                console.log('masuk if helperr ===>', data)
                 next()
             }else{
+                console.log('masuk else')
                 res.status(400).json({
                     message: err.message
                 })
             }
         }).catch((err) => {
+            console.log('masuk catch')
             res.status(400).json({
                 message: 'User must be Log In'
             })

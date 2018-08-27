@@ -9,7 +9,7 @@
             <h5 class="card-title">{{data.title}}</h5>
             <p class="card-text">{{data.description}}</p>
             <hr>
-            <small>{{formatDate(data.createdAt)}}</small>
+            <small>posted {{formatDate(data.createdAt)}}</small>
             <br><hr>
             
             <a href="#" class="btn btn-primary">Continue Read</a>
