@@ -5,10 +5,10 @@
         <router-link to="/">UR-blog</router-link>
       </div>
       
-      <router-link to="/">Home</router-link> |
-      <router-link to="/myArticle">My Article</router-link> | 
-      <router-link v-if="token" to="/login">Login</router-link> |
-      <router-link to="/" v-if="!token" @click="logout">Logout</router-link>
+      <router-link to="/" > Home |</router-link>
+      <router-link  to="/myArticle"> MyArticle |</router-link>
+      <router-link  to="/login"> Login |</router-link> 
+      <a href="/" @click="logout"> Logout |</a> 
       
     </div>
     <router-view/>
@@ -26,7 +26,7 @@ export default {
   },methods:{
     logout(){
       localStorage.removeItem('token')
-      this.$router.push('/')
+      // this.$router.push('/')
 
     }
   }

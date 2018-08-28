@@ -7,12 +7,11 @@ var isLogin = (req, res, next) => {
     
     let token = req.headers.token
     let decode = jwt.verify(token, process.env.JWT_TOKEN)
-    console.log('ini email sekarang cuy', decode.email)
     if(token){
         User.findOne({email: decode.email})
         .then((data) => {
             if(data){
-                console.log('masuk if helperr ===>', data)
+    
                 next()
             }else{
                 console.log('masuk else')

@@ -24,11 +24,11 @@
 
                 <tr v-for="(article,index) in myArticle" :key="index">
                     <td>{{formatDate(article.createdAt)}}</td>
-                    <td>t{{article.title}}</td>
+                    <td>{{article.title}}</td>
                     <!-- <td>{{article.description}}</td> -->
                     <td>
                         <a href="" class="btn btn-success" data-toggle="modal" data-target="#update">UPDATE</a>
-                        <a href="" class="btn btn-danger" @click="deleteArticle" style="margin-left: 15px">DELETE</a>
+                        <a href="" class="btn btn-danger" @click="deleteArticle(article._id)" style="margin-left: 15px">DELETE</a>
                     </td>
 
                 </tr>
@@ -140,14 +140,13 @@
                     })
             },
 
-            deleteArticle: function (data) {
-                let token = localStorage.getItem('token')
+            deleteArticle: function (id) {
                 axios({
                         method: "DELETE",
-                        url: `http://localhost:3000/articles/getmyarticle/${data}`,
-                        headers:{
-                            token
-                        }
+                        url: `http://localhost:3000/articles/${id}`,
+                    
+                    
+
                     })
                     .then(response => {
                         router.push('/getmyarticle')

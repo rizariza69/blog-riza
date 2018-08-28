@@ -7,10 +7,7 @@ const tokenjwt = process.env.JWT_TOKEN
 module.exports = {
     create: (req,res) => {
     let token = req.headers.token;
-    console.log('req headersdari create ===>', req.headers.token)
     let decode = jwt.verify(token, tokenjwt);
-    console.log(req.body);
-    
    
         Article
             .create({
@@ -20,7 +17,6 @@ module.exports = {
             })
 
             .then(article => {
-                console.log('masuk==>', req.body);
                 
                 res.status(200).json({
                     msg:'create success',
@@ -34,7 +30,8 @@ module.exports = {
                 })
             })
     },
-    delete: (req,res) => {
+    deleteArticle: (req,res) => {
+
         Article
             .deleteOne(
                 {
@@ -48,7 +45,6 @@ module.exports = {
 
                 })
             })
-
             .catch(err => {
                 res.status(500).json({
                     msg: 'error'
